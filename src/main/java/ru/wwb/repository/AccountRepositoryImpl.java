@@ -1,0 +1,47 @@
+
+package ru.wwb.repository;
+
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.dao.DataAccessException;
+import ru.wwb.model.Account;
+import ru.wwb.repository.AccountRepository;
+import org.springframework.stereotype.Repository;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.util.Collection;
+
+
+@Repository
+public class AccountRepositoryImpl implements AccountRepository {
+
+    @PersistenceContext
+    private EntityManager em;
+
+    @Override
+    @Cacheable(value = "accounts")
+    @SuppressWarnings("unchecked")
+    public Collection<Account> findAll() throws DataAccessException {
+        return this.em.createQuery
+                ("SELECT distinct account FROM Account account  ORDER BY account.id").getResultList();
+
+
+    }
+
+    @Override
+    public Account findById(int id) throws DataAccessException {
+          return this.em.find(Account.class, id);
+    }
+
+    @Override
+    public void save(Account account) throws DataAccessException {
+        if (account.getId() == null) {
+            this.em.persist(account);
+        }
+        else {
+            this.em.merge(account);
+        }
+    }
+
+
+}
