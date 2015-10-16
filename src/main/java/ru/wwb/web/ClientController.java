@@ -39,8 +39,6 @@ public class ClientController {
         if (result.hasErrors()) {
             return "clients/createOrUpdateClientForm";
         }
-        calcAge(client);
-
         bankServiceFacade.saveClient(client);
         return "redirect:/clients.html?success=true";
     }
@@ -49,7 +47,6 @@ public class ClientController {
     public ModelAndView showClient(@PathVariable("clientId") int clientId) {
         ModelAndView mav = new ModelAndView("clients/clientDetails");
         Client client = this.bankServiceFacade.findClientById(clientId);
-        calcAge(client);
         mav.addObject(client);
         return mav;
     }
@@ -65,20 +62,11 @@ public class ClientController {
         return getClients();
     }
 
-    private void calcAge(Client client) {
-        DateTime now = new DateTime();
-        int age = Years.yearsBetween(client.getBirthDate(), now).getYears();
-        client.setAge(age);
-    }
 
     private Clients getClients() {
         Clients clients = new Clients();
         clients.getClientList().addAll(this.bankServiceFacade.findClients());
-        for (Client client : clients.getClientList()){
-            calcAge(client);
-        }
         return clients;
     }
-
 
 }

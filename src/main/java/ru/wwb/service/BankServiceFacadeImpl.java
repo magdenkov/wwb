@@ -2,11 +2,13 @@
 package ru.wwb.service;
 
 import org.joda.time.DateTime;
+import org.joda.time.Years;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataAccessException;
 import ru.wwb.model.Account;
 import ru.wwb.model.Client;
+import ru.wwb.model.Clients;
 import ru.wwb.model.Transaction;
 import ru.wwb.repository.AccountRepository;
 import ru.wwb.repository.ClientRepository;
@@ -39,12 +41,18 @@ public class BankServiceFacadeImpl implements BankServiceFacade {
     @Transactional(readOnly = true)
     @Cacheable(value = "clients")
     public Collection<Client> findClients() throws DataAccessException {
-        return clientRepository.findAll();
+        Collection<Client> clients = clientRepository.findAll();
+        for (Client client : clients){
+            calcAge(client);
+        }
+
+        return clients;
     }
 
     @Override
     @Transactional
     public void saveClient(Client client) throws DataAccessException {
+        calcAge(client);
         clientRepository.save(client);
     }
 
@@ -65,7 +73,9 @@ public class BankServiceFacadeImpl implements BankServiceFacade {
     @Override
     @Transactional(readOnly = true)
     public Client findClientById(int clientId) throws DataAccessException {
-        return clientRepository.findById(clientId);
+        Client client = clientRepository.findById(clientId);
+        calcAge(client);
+        return client;
     }
 
     @Override
@@ -107,6 +117,12 @@ public class BankServiceFacadeImpl implements BankServiceFacade {
     @Transactional(readOnly = true)
     public Account findAccountById(int id) throws DataAccessException {
         return accountRepository.findById(id);
+    }
+
+    private void calcAge(Client client) {
+        DateTime now = new DateTime();
+        int age = Years.yearsBetween(client.getBirthDate(), now).getYears();
+        client.setAge(age);
     }
 
 
