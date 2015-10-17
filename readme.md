@@ -1,6 +1,6 @@
 Тестовое задание http://www.dataart.ru/blog/2014/07/dolgaya-doroga-v-java/
 
-чтобы запустить приложение потребуется java 8 и maven 3.
+чтобы запустить приложение потребуется java 7 и maven 3.
 1) клонируйте репозиторий.(или dowload zip)
 2) Потом в коммандной строке где pom.xml выполните mvn tomcat7:run
 3) В браузере откройте http://localhost:9966/wwb/
