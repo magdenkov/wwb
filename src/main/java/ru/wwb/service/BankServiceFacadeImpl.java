@@ -4,7 +4,6 @@ package ru.wwb.service;
 import org.joda.time.DateTime;
 import org.joda.time.Years;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,7 +37,6 @@ public class BankServiceFacadeImpl implements BankServiceFacade {
 
     @Override
     @Transactional(readOnly = true)
-    @Cacheable(value = "clients")
     public Collection<Client> findClients() throws DataAccessException {
         Collection<Client> clients = clientRepository.findAll();
         for (Client client : clients){
@@ -57,14 +55,12 @@ public class BankServiceFacadeImpl implements BankServiceFacade {
 
     @Override
     @Transactional(readOnly = true)
-    @Cacheable(value = "accounts")
     public Collection<Account> findAllAccounts() throws DataAccessException {
         return accountRepository.findAll();
     }
 
     @Override
     @Transactional(readOnly = true)
-    @Cacheable(value = "transactions")
     public Collection<Transaction> findAllTransactions() throws DataAccessException {
         return transactionRepository.findAll();
     }

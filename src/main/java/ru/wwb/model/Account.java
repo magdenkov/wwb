@@ -45,15 +45,15 @@ public class Account extends BaseEntity {
 
         Account account = (Account) o;
 
-        if (!client.equals(account.client)) return false;
-        return moneyAmount.equals(account.moneyAmount);
+        if (getClient() != null ? !getClient().equals(account.getClient()) : account.getClient() != null) return false;
+        return !(getMoneyAmount() != null ? !getMoneyAmount().equals(account.getMoneyAmount()) : account.getMoneyAmount() != null);
 
     }
 
     @Override
     public int hashCode() {
-        int result = client.hashCode();
-        result = 31 * result + moneyAmount.hashCode();
+        int result = getClient() != null ? getClient().hashCode() : 0;
+        result = 31 * result + (getMoneyAmount() != null ? getMoneyAmount().hashCode() : 0);
         return result;
     }
 }

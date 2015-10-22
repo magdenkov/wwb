@@ -37,21 +37,21 @@ public class Transaction extends BaseEntity {
 
         Transaction that = (Transaction) o;
 
-        if (gettDate() != null ? !gettDate().equals(that.gettDate()) : that.gettDate() != null) return false;
-        if (!getAccountFrom().equals(that.getAccountFrom())) return false;
-        if (!getAccountTo().equals(that.getAccountTo())) return false;
-        if (!getMessage().equals(that.getMessage())) return false;
-        return !(getMoneyTransferAmount() != null ? !getMoneyTransferAmount().equals(that.getMoneyTransferAmount()) : that.getMoneyTransferAmount() != null);
+        if (tDate != null ? !tDate.equals(that.tDate) : that.tDate != null) return false;
+        if (accountFrom != null ? !accountFrom.equals(that.accountFrom) : that.accountFrom != null) return false;
+        if (accountTo != null ? !accountTo.equals(that.accountTo) : that.accountTo != null) return false;
+        if (message != null ? !message.equals(that.message) : that.message != null) return false;
+        return !(moneyTransferAmount != null ? !moneyTransferAmount.equals(that.moneyTransferAmount) : that.moneyTransferAmount != null);
 
     }
 
     @Override
     public int hashCode() {
-        int result = gettDate() != null ? gettDate().hashCode() : 0;
-        result = 31 * result + getAccountFrom().hashCode();
-        result = 31 * result + getAccountTo().hashCode();
-        result = 31 * result + getMessage().hashCode();
-        result = 31 * result + (getMoneyTransferAmount() != null ? getMoneyTransferAmount().hashCode() : 0);
+        int result = tDate != null ? tDate.hashCode() : 0;
+        result = 31 * result + (accountFrom != null ? accountFrom.hashCode() : 0);
+        result = 31 * result + (accountTo != null ? accountTo.hashCode() : 0);
+        result = 31 * result + (message != null ? message.hashCode() : 0);
+        result = 31 * result + (moneyTransferAmount != null ? moneyTransferAmount.hashCode() : 0);
         return result;
     }
 
