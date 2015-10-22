@@ -1,10 +1,9 @@
 
 package ru.wwb.repository;
 
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataAccessException;
-import ru.wwb.model.Client;
 import org.springframework.stereotype.Repository;
+import ru.wwb.model.Client;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,7 +19,6 @@ public class ClientRepositoryImpl implements ClientRepository {
 
 
     @Override
-    @Cacheable(value = "clients")
     @SuppressWarnings("unchecked")
     public Collection<Client> findAll() {
         return this.em.createQuery("SELECT distinct client FROM Client client  ORDER BY client.lastName, client.firstName").getResultList();

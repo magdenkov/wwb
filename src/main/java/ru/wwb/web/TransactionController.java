@@ -5,9 +5,11 @@ import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import ru.wwb.model.Account;
-
 import ru.wwb.model.Transaction;
 import ru.wwb.model.Transactions;
 import ru.wwb.service.BankServiceFacade;
@@ -59,7 +61,7 @@ public class TransactionController {
 
 
 
-    @RequestMapping(value={"/transactions.xml","/transactions.html"})
+    @RequestMapping(value={"/transactions.html"})
     public String showTransactionList(Map<String, Object> model) {
 
         Transactions transactions = new Transactions();
@@ -69,12 +71,6 @@ public class TransactionController {
         return "transactions/transactionList";
     }
 
-    @RequestMapping("/transactions.json")
-    public @ResponseBody Transactions showResourcesVetList() {
-        Transactions transactions = new Transactions();
-        transactions.getTransactionList().addAll(this.bankServiceFacade.findAllTransactions());
 
-        return transactions;
-    }
 
 }

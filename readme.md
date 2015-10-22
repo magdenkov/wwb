@@ -9,4 +9,4 @@
 in-memory базу hqsqldb, которая инициализируется при старте приложения.
 
 По технологиям я старался придерживаться стека который у вас указан  в вакансии
-Java8, Tomcat7, Spring 4(Core, MVC+jsp, Transactions), Hibernate 4 + HQL.
+Java7, Tomcat7, Spring 4(Core, MVC+jsp, Transactions), Hibernate 4 + HQL.

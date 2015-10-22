@@ -2,14 +2,17 @@
 package ru.wwb.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import ru.wwb.model.Account;
 import ru.wwb.model.Accounts;
 import ru.wwb.model.Client;
 import ru.wwb.service.BankServiceFacade;
-import org.springframework.stereotype.Controller;
 
 import javax.validation.Valid;
 import java.util.Map;
@@ -50,7 +53,7 @@ public class AccountController {
         }
     }
 
-    @RequestMapping(value={"/accounts.xml","/accounts.html"})
+    @RequestMapping(value={"/accounts.html"})
     public String showAccountList(Map<String, Object> model) {
 
         Accounts accounts = new Accounts();
@@ -60,13 +63,7 @@ public class AccountController {
         return "accounts/accountList";
     }
 
-    @RequestMapping("/accounts.json")
-    public @ResponseBody Accounts showResourcesVetList() {
-        Accounts accounts = new Accounts();
-        accounts.getAccountList().addAll(this.bankServiceFacade.findAllAccounts());
 
-        return accounts;
-    }
 
 
 

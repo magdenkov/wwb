@@ -1,16 +1,14 @@
 
 package ru.wwb.web;
 
-import org.joda.time.DateTime;
-import org.joda.time.Years;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.wwb.model.Client;
 import ru.wwb.model.Clients;
 import ru.wwb.service.BankServiceFacade;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -51,15 +49,10 @@ public class ClientController {
         return mav;
     }
 
-    @RequestMapping(value={"/clients.xml","/clients.html"})
+    @RequestMapping(value={"/clients.html"})
     public String showClientList(Map<String, Object> model) {
         model.put("clients", getClients());
         return "clients/clientList";
-    }
-
-    @RequestMapping("/clients.json")
-    public @ResponseBody Clients showResourcesClientList() {
-        return getClients();
     }
 
 

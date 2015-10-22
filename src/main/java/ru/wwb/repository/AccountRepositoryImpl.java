@@ -1,11 +1,9 @@
 
 package ru.wwb.repository;
 
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataAccessException;
-import ru.wwb.model.Account;
-import ru.wwb.repository.AccountRepository;
 import org.springframework.stereotype.Repository;
+import ru.wwb.model.Account;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,7 +17,6 @@ public class AccountRepositoryImpl implements AccountRepository {
     private EntityManager em;
 
     @Override
-    @Cacheable(value = "accounts")
     @SuppressWarnings("unchecked")
     public Collection<Account> findAll() throws DataAccessException {
         return this.em.createQuery

@@ -6,14 +6,13 @@ import org.joda.time.Years;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.wwb.model.Account;
 import ru.wwb.model.Client;
-import ru.wwb.model.Clients;
 import ru.wwb.model.Transaction;
 import ru.wwb.repository.AccountRepository;
 import ru.wwb.repository.ClientRepository;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.wwb.repository.TransactionRepository;
 
 import java.util.Collection;
