@@ -1,8 +1,6 @@
 
 package ru.wwb.service;
 
-import org.joda.time.DateTime;
-import org.joda.time.Years;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -21,6 +19,7 @@ import java.util.Collection;
 public class BankServiceFacadeImpl implements BankServiceFacade {
 
 
+    private final BSDelegate BSDelegate = new BSDelegate(this);
     private AccountRepository accountRepository;
     private ClientRepository clientRepository;
     private TransactionRepository transactionRepository;
@@ -40,7 +39,7 @@ public class BankServiceFacadeImpl implements BankServiceFacade {
     public Collection<Client> findClients() throws DataAccessException {
         Collection<Client> clients = clientRepository.findAll();
         for (Client client : clients){
-            calcAge(client);
+            BSDelegate.calcAge(client);
         }
 
         return clients;
@@ -49,7 +48,7 @@ public class BankServiceFacadeImpl implements BankServiceFacade {
     @Override
     @Transactional
     public void saveClient(Client client) throws DataAccessException {
-        calcAge(client);
+        BSDelegate.calcAge(client);
         clientRepository.save(client);
     }
 
@@ -69,7 +68,7 @@ public class BankServiceFacadeImpl implements BankServiceFacade {
     @Transactional(readOnly = true)
     public Client findClientById(int clientId) throws DataAccessException {
         Client client = clientRepository.findById(clientId);
-        calcAge(client);
+        BSDelegate.calcAge(client);
         return client;
     }
 
@@ -77,48 +76,24 @@ public class BankServiceFacadeImpl implements BankServiceFacade {
     @Transactional
     public void saveAccount(Account account) throws DataAccessException {
         accountRepository.save(account);
-        saveTransactionWhenNewAccountCreate(account);
-    }
-
-    private void saveTransactionWhenNewAccountCreate(Account account) {
-        Transaction transaction = new Transaction();
-        transaction.settDate(new DateTime());
-        transaction.setAccountFrom(account);
-        transaction.setAccountTo(account);
-        transaction.setMessage("Client " + account.getClient().getLastName() + " has opened new account");
-        transaction.setMoneyTransferAmount(account.getMoneyAmount());
-        transactionRepository.save(transaction);
+        transactionRepository.save(BSDelegate.prepareTransactionForNewAccountCreate(account));
     }
 
     @Override
     @Transactional
     public void saveTransaction(Transaction transaction) throws DataAccessException {
-        transferMoney(transaction);
+        BSDelegate.transferMoney(transaction);
         accountRepository.save(transaction.getAccountTo());
         accountRepository.save(transaction.getAccountFrom());
         transactionRepository.save(transaction);
     }
 
-    private void transferMoney(Transaction transaction) {
-        Double moneyTransfer = transaction.getMoneyTransferAmount();
-        Double moneyFrom = transaction.getAccountFrom().getMoneyAmount() - moneyTransfer;
-        Double moneyTo = transaction.getAccountTo().getMoneyAmount() + moneyTransfer;
 
-        transaction.getAccountTo().setMoneyAmount(moneyTo);
-        transaction.getAccountFrom().setMoneyAmount(moneyFrom);
-    }
 
     @Override
     @Transactional(readOnly = true)
     public Account findAccountById(int id) throws DataAccessException {
         return accountRepository.findById(id);
     }
-
-    private void calcAge(Client client) {
-        DateTime now = new DateTime();
-        int age = Years.yearsBetween(client.getBirthDate(), now).getYears();
-        client.setAge(age);
-    }
-
 
 }
