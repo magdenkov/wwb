@@ -10,11 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import ru.wwb.model.Account;
+import ru.wwb.model.Client;
 import ru.wwb.model.Transaction;
 import ru.wwb.model.Transactions;
 import ru.wwb.service.BankServiceFacade;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -64,8 +67,8 @@ public class TransactionController {
     @RequestMapping(value={"/transactions.html"})
     public String showTransactionList(Map<String, Object> model) {
 
-        Transactions transactions = new Transactions();
-        transactions.getTransactionList().addAll(this.bankServiceFacade.findAllTransactions());
+        List<Transaction> transactions = new ArrayList<>();
+        transactions.addAll(this.bankServiceFacade.findAllTransactions());
 
         model.put("transactions", transactions);
         return "transactions/transactionList";

@@ -7,9 +7,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.wwb.model.Client;
-import ru.wwb.model.Clients;
 import ru.wwb.service.BankServiceFacade;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -51,15 +52,12 @@ public class ClientController {
 
     @RequestMapping(value={"/clients.html"})
     public String showClientList(Map<String, Object> model) {
-        model.put("clients", getClients());
+        List<Client> clients = new ArrayList<>();
+        clients.addAll(this.bankServiceFacade.findClients());
+        model.put("clients", clients);
         return "clients/clientList";
     }
 
 
-    private Clients getClients() {
-        Clients clients = new Clients();
-        clients.getClientList().addAll(this.bankServiceFacade.findClients());
-        return clients;
-    }
 
 }

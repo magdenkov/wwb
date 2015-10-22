@@ -15,6 +15,8 @@ import ru.wwb.model.Client;
 import ru.wwb.service.BankServiceFacade;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -29,7 +31,6 @@ public class AccountController {
         this.bankServiceFacade = bankServiceFacade;
     }
 
-    // clients/1/accounts/new.html
     @RequestMapping(value = "/clients/{clientId}/accounts/new", method = RequestMethod.GET)
     public String initCreationAccountForm(@PathVariable("clientId") int clientId, Map<String, Object> model) {
         Client client = this.bankServiceFacade.findClientById(clientId);
@@ -56,8 +57,8 @@ public class AccountController {
     @RequestMapping(value={"/accounts.html"})
     public String showAccountList(Map<String, Object> model) {
 
-        Accounts accounts = new Accounts();
-        accounts.getAccountList().addAll(this.bankServiceFacade.findAllAccounts());
+        List<Account> accounts = new ArrayList<>();
+        accounts.addAll(this.bankServiceFacade.findAllAccounts());
 
         model.put("accounts", accounts);
         return "accounts/accountList";
