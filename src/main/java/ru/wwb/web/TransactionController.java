@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import ru.wwb.model.Account;
-import ru.wwb.model.Client;
 import ru.wwb.model.Transaction;
-import ru.wwb.model.Transactions;
 import ru.wwb.service.BankServiceFacade;
 
 import java.util.ArrayList;

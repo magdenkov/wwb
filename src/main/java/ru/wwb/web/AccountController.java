@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import ru.wwb.model.Account;
-import ru.wwb.model.Accounts;
 import ru.wwb.model.Client;
 import ru.wwb.service.BankServiceFacade;
 

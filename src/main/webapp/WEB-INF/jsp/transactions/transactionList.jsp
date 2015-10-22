@@ -25,7 +25,7 @@
     <div class="alert alert-success">new transaction has been made successfully!</div>
     </c:if>
 
-  <datatables:table id="transactions" data="${transactions.transactionList}" row="transaction" theme="bootstrap2" cssClass="table table-striped" pageable="false" info="false">
+  <datatables:table id="transactions" data="${transactions}" row="transaction" theme="bootstrap2" cssClass="table table-striped" pageable="false" info="false">
   <datatables:column title="ID">
     <c:out value="${transaction.id} "></c:out>
   </datatables:column>

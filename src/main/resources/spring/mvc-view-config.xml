@@ -28,36 +28,8 @@
 	</mvc:view-resolvers>
 
     <!-- Renders an XML view. Used by the BeanNameViewResolver  -->
-	<bean id="accounts/accountList.xml" class="org.springframework.web.servlet.view.xml.MarshallingView">
-		<property name="marshaller" ref="accountMarshaller"/>
-	</bean>
-
-	<oxm:jaxb2-marshaller id="accountMarshaller">
-		<!-- Object-XML mapping declared using annotations inside 'Vets' -->
-		<oxm:class-to-be-bound name="ru.wwb.model.Accounts"/>
-	</oxm:jaxb2-marshaller>
 
 
-	<!-- Renders an XML view. Used by the BeanNameViewResolver  -->
-	<bean id="clients/clientList.xml" class="org.springframework.web.servlet.view.xml.MarshallingView">
-		<property name="marshaller" ref="clientMarshaller"/>
-	</bean>
-
-	<oxm:jaxb2-marshaller id="clientMarshaller">
-		<!-- Object-XML mapping declared using annotations inside 'Vets' -->
-		<oxm:class-to-be-bound name="ru.wwb.model.Clients"/>
-	</oxm:jaxb2-marshaller>
-
-
-	<!-- Renders an XML view. Used by the BeanNameViewResolver  -->
-	<bean id="transactions/transactionList.xml" class="org.springframework.web.servlet.view.xml.MarshallingView">
-		<property name="marshaller" ref="transactionMarshaller"/>
-	</bean>
-
-	<oxm:jaxb2-marshaller id="transactionMarshaller">
-		<!-- Object-XML mapping declared using annotations inside 'Vets' -->
-		<oxm:class-to-be-bound name="ru.wwb.model.Transactions"/>
-	</oxm:jaxb2-marshaller>
 
 
 </beans>

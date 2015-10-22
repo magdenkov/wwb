@@ -22,7 +22,7 @@
 
   <h2>Clients</h2>
 
-  <datatables:table id="clients" data="${clients.clientList}" row="client" theme="bootstrap2" cssClass="table table-striped" pageable="false" info="false">
+  <datatables:table id="clients" data="${clients}" row="client" theme="bootstrap2" cssClass="table table-striped" pageable="false" info="false">
       <datatables:column title="ID">
           <c:out value="${client.id} "></c:out>
       </datatables:column>

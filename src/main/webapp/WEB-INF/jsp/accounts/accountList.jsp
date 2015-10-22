@@ -24,7 +24,7 @@
 
   <h2>Accounts</h2>
 
-  <datatables:table id="accounts" data="${accounts.accountList}" row="account" theme="bootstrap2" cssClass="table table-striped" pageable="false" info="false">
+  <datatables:table id="accounts" data="${accounts}" row="account" theme="bootstrap2" cssClass="table table-striped" pageable="false" info="false">
   <datatables:column title="ID">
     <c:out value="${account.id}"></c:out>
   </datatables:column>
