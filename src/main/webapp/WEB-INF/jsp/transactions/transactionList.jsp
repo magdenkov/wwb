@@ -36,7 +36,7 @@
       <c:out value="${transaction.accountTo.id} ${transaction.accountTo.client.firstName} ${transaction.accountTo.client.lastName}"></c:out>
     </datatables:column>
     <datatables:column title="money ammount">
-      <c:out value="$ ${transaction.moneyTransferAmount}"></c:out>
+      <fmt:formatNumber type="currency"   value="${transaction.moneyTransferAmount}" />
     </datatables:column>
     <datatables:column title="message">
       <c:out value="${transaction.message}"></c:out>

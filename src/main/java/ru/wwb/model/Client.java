@@ -35,7 +35,7 @@ public class Client extends BaseEntity {
     private Integer age;
 
     @Transient
-    private Integer totalMoney;
+    private Double totalMoney;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "client", fetch = FetchType.EAGER)
     private Set<Account> accounts;
@@ -108,8 +108,8 @@ public class Client extends BaseEntity {
 
 
 
-    public Integer getTotalMoney() {
-        totalMoney = 0;
+    public Double getTotalMoney() {
+        totalMoney = 0.0;
         for (Account acc: accounts) {
             totalMoney += acc.getMoneyAmount();
         }

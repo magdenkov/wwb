@@ -100,9 +100,9 @@ public class BankServiceFacadeImpl implements BankServiceFacade {
     }
 
     private void transferMoney(Transaction transaction) {
-        int moneyTransfer = transaction.getMoneyTransferAmount();
-        int moneyFrom = transaction.getAccountFrom().getMoneyAmount() - moneyTransfer;
-        int moneyTo = transaction.getAccountTo().getMoneyAmount() + moneyTransfer;
+        Double moneyTransfer = transaction.getMoneyTransferAmount();
+        Double moneyFrom = transaction.getAccountFrom().getMoneyAmount() - moneyTransfer;
+        Double moneyTo = transaction.getAccountTo().getMoneyAmount() + moneyTransfer;
 
         transaction.getAccountTo().setMoneyAmount(moneyTo);
         transaction.getAccountFrom().setMoneyAmount(moneyFrom);

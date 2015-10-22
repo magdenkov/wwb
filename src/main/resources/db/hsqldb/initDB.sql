@@ -15,7 +15,7 @@ CREATE INDEX clients_last_name ON clients (last_name);
 CREATE TABLE accounts (
   id          INTEGER IDENTITY PRIMARY KEY,
   client_id      INTEGER NOT NULL,
-  money_amount  INTEGER NOT NULL
+  money_amount  DOUBLE
 );
 ALTER TABLE accounts ADD CONSTRAINT fk_accounts_clients FOREIGN KEY (client_id) REFERENCES clients (id);
 CREATE INDEX accounts_client_id ON accounts (client_id);
@@ -24,7 +24,7 @@ CREATE TABLE transactions (
   id          INTEGER IDENTITY PRIMARY KEY,
   account_id_from      INTEGER NOT NULL,
   account_id_to      INTEGER NOT NULL,
-  money_transfer_amount  INTEGER NOT NULL,
+  money_transfer_amount  DOUBLE NOT NULL,
   message  VARCHAR(255),
   t_date DATE
 );

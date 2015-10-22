@@ -32,7 +32,8 @@
       <c:out value="${account.client.firstName} ${account.client.lastName}"></c:out>
     </datatables:column>
     <datatables:column title="money ammount">
-      <c:out value="$ ${account.moneyAmount}">$</c:out>
+    <fmt:formatNumber type="currency"   value="${account.moneyAmount}" />
+
     </datatables:column>
   </datatables:table>
 

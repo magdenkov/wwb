@@ -27,8 +27,8 @@ public class Transaction extends BaseEntity {
     @Column(name = "message")
     private String message;
 
-    @Column(name = "money_transfer_amount")
-    private Integer moneyTransferAmount;
+    @Column(name = "money_transfer_amount", precision=10, scale=2)
+    private Double moneyTransferAmount;
 
     @Override
     public boolean equals(Object o) {
@@ -55,11 +55,11 @@ public class Transaction extends BaseEntity {
         return result;
     }
 
-    public Integer getMoneyTransferAmount() {
+    public Double getMoneyTransferAmount() {
         return moneyTransferAmount;
     }
 
-    public void setMoneyTransferAmount(Integer moneyTransferAmount) {
+    public void setMoneyTransferAmount(Double moneyTransferAmount) {
         this.moneyTransferAmount = moneyTransferAmount;
     }
 

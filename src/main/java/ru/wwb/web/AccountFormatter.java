@@ -7,6 +7,7 @@ import ru.wwb.model.Account;
 import ru.wwb.service.BankServiceFacade;
 
 import java.text.ParseException;
+import java.util.Currency;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,7 +24,8 @@ public class AccountFormatter implements Formatter<Account> {
 
     @Override
     public String print(Account account, Locale locale) {
-        return account.toString();
+            return "ID" +account.getId() + " " + account.getClient().getFirstName() + " " + account.getClient().getLastName() + " " + account.getMoneyAmount() +
+                    Currency.getInstance(Locale.getDefault());
     }
 
     @Override

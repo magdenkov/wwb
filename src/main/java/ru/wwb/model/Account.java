@@ -13,8 +13,8 @@ public class Account extends BaseEntity {
     @JoinColumn(name = "client_id")
     private Client client;
 
-    @Column(name = "money_amount")
-    private Integer moneyAmount;
+    @Column(name = "money_amount", precision=10, scale=2)
+    private Double moneyAmount;
 
 
     public Client getClient() {
@@ -25,18 +25,15 @@ public class Account extends BaseEntity {
         this.client = client;
     }
 
-    public Integer getMoneyAmount() {
+    public Double getMoneyAmount() {
         return moneyAmount;
     }
 
-    public void setMoneyAmount(Integer moneyAmount) {
+    public void setMoneyAmount(Double moneyAmount) {
         this.moneyAmount = moneyAmount;
     }
 
-    @Override
-    public String toString() {
-        return "ID" + getId() + " " + getClient().getFirstName() + " " + getClient().getLastName() + " " + getMoneyAmount() + "$";
-    }
+
 
     @Override
     public boolean equals(Object o) {
