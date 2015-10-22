@@ -106,6 +106,36 @@ public class Client extends BaseEntity {
         return age;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Client client = (Client) o;
+
+        if (!getFirstName().equals(client.getFirstName())) return false;
+        if (!getLastName().equals(client.getLastName())) return false;
+        if (!getBirthDate().equals(client.getBirthDate())) return false;
+        if (!getAddress().equals(client.getAddress())) return false;
+        if (getAge() != null ? !getAge().equals(client.getAge()) : client.getAge() != null) return false;
+        if (getTotalMoney() != null ? !getTotalMoney().equals(client.getTotalMoney()) : client.getTotalMoney() != null)
+            return false;
+        return !(getAccounts() != null ? !getAccounts().equals(client.getAccounts()) : client.getAccounts() != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getFirstName().hashCode();
+        result = 31 * result + getLastName().hashCode();
+        result = 31 * result + getBirthDate().hashCode();
+        result = 31 * result + getAddress().hashCode();
+        result = 31 * result + (getAge() != null ? getAge().hashCode() : 0);
+        result = 31 * result + (getTotalMoney() != null ? getTotalMoney().hashCode() : 0);
+        result = 31 * result + (getAccounts() != null ? getAccounts().hashCode() : 0);
+        return result;
+    }
+
     public Integer getTotalMoney() {
         totalMoney = 0;
         for (Account acc: accounts) {
@@ -114,3 +144,4 @@ public class Client extends BaseEntity {
         return totalMoney;
     }
 }
+

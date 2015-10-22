@@ -37,4 +37,23 @@ public class Account extends BaseEntity {
     public String toString() {
         return "ID" + getId() + " " + getClient().getFirstName() + " " + getClient().getLastName() + " " + getMoneyAmount() + "$";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Account account = (Account) o;
+
+        if (!client.equals(account.client)) return false;
+        return moneyAmount.equals(account.moneyAmount);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = client.hashCode();
+        result = 31 * result + moneyAmount.hashCode();
+        return result;
+    }
 }

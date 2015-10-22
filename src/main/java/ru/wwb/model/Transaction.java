@@ -30,6 +30,30 @@ public class Transaction extends BaseEntity {
     @Column(name = "money_transfer_amount")
     private Integer moneyTransferAmount;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Transaction that = (Transaction) o;
+
+        if (gettDate() != null ? !gettDate().equals(that.gettDate()) : that.gettDate() != null) return false;
+        if (!getAccountFrom().equals(that.getAccountFrom())) return false;
+        if (!getAccountTo().equals(that.getAccountTo())) return false;
+        if (!getMessage().equals(that.getMessage())) return false;
+        return !(getMoneyTransferAmount() != null ? !getMoneyTransferAmount().equals(that.getMoneyTransferAmount()) : that.getMoneyTransferAmount() != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = gettDate() != null ? gettDate().hashCode() : 0;
+        result = 31 * result + getAccountFrom().hashCode();
+        result = 31 * result + getAccountTo().hashCode();
+        result = 31 * result + getMessage().hashCode();
+        result = 31 * result + (getMoneyTransferAmount() != null ? getMoneyTransferAmount().hashCode() : 0);
+        return result;
+    }
 
     public Integer getMoneyTransferAmount() {
         return moneyTransferAmount;
