@@ -3,6 +3,7 @@ package ru.wwb.model;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.joda.time.DateTime;
+import org.joda.time.Years;
 import org.springframework.beans.support.MutableSortDefinition;
 import org.springframework.beans.support.PropertyComparator;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -101,8 +102,8 @@ public class Client extends BaseEntity {
     }
 
     public Integer getAge() {
-       /* DateTime now = new DateTime();
-        age = Years.yearsBetween(birthDate, now).getYears();*/
+        DateTime now = new DateTime();
+        age = Years.yearsBetween(birthDate, now).getYears();
         return age;
     }
 

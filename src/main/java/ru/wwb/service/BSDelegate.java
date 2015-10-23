@@ -1,9 +1,7 @@
 package ru.wwb.service;
 
 import org.joda.time.DateTime;
-import org.joda.time.Years;
 import ru.wwb.model.Account;
-import ru.wwb.model.Client;
 import ru.wwb.model.Transaction;
 
 public class BSDelegate {
@@ -23,11 +21,7 @@ public class BSDelegate {
         return transaction;
     }
 
-    void calcAge(Client client) {
-        DateTime now = new DateTime();
-        int age = Years.yearsBetween(client.getBirthDate(), now).getYears();
-        client.setAge(age);
-    }
+
 
     void transferMoney(Transaction transaction) {
         Double moneyTransfer = transaction.getMoneyTransferAmount();

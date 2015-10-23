@@ -38,9 +38,6 @@ public class BankServiceFacadeImpl implements BankServiceFacade {
     @Transactional(readOnly = true)
     public Collection<Client> findClients() throws DataAccessException {
         Collection<Client> clients = clientRepository.findAll();
-        for (Client client : clients){
-            BSDelegate.calcAge(client);
-        }
 
         return clients;
     }
@@ -48,7 +45,6 @@ public class BankServiceFacadeImpl implements BankServiceFacade {
     @Override
     @Transactional
     public void saveClient(Client client) throws DataAccessException {
-        BSDelegate.calcAge(client);
         clientRepository.save(client);
     }
 
@@ -68,7 +64,6 @@ public class BankServiceFacadeImpl implements BankServiceFacade {
     @Transactional(readOnly = true)
     public Client findClientById(int clientId) throws DataAccessException {
         Client client = clientRepository.findById(clientId);
-        BSDelegate.calcAge(client);
         return client;
     }
 
