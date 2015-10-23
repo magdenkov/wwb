@@ -42,7 +42,7 @@
       <c:out value="${transaction.message}"></c:out>
     </datatables:column>
     <datatables:column title="tDate">
-     <joda:format value="${transaction.tDate}" pattern="yyyy-MM-dd"/>
+     <joda:format value="${transaction.tDate}" pattern="yyyy-MM-dd HH:mm"/>
 
     </datatables:column>
   </datatables:table>

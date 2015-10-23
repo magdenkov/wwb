@@ -12,7 +12,7 @@ public class Transaction extends BaseEntity {
 
     @Column(name = "t_date")
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
     private DateTime tDate;
 
     @ManyToOne

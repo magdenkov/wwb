@@ -26,7 +26,7 @@ CREATE TABLE transactions (
   account_id_to      INTEGER NOT NULL,
   money_transfer_amount  DOUBLE NOT NULL,
   message  VARCHAR(255),
-  t_date DATE
+  t_date TIMESTAMP
 );
 ALTER TABLE transactions ADD CONSTRAINT fk_transactions_accounts_from FOREIGN KEY (account_id_from) REFERENCES accounts (id);
 ALTER TABLE transactions ADD CONSTRAINT fk_transactions_accounts_to FOREIGN KEY (account_id_to) REFERENCES accounts (id);

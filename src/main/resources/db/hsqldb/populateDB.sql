@@ -18,12 +18,12 @@ INSERT INTO accounts VALUES (8, 3, 200.19);
 INSERT INTO accounts VALUES (9, 1, 400.10);
 INSERT INTO accounts VALUES (10, 7, 100000.17);
 
-INSERT INTO transactions VALUES (1, 1, 2, 100.14, 'salary','2012-09-04');
-INSERT INTO transactions VALUES (2, 2, 3, 100.16, 'salary','2012-09-04');
-INSERT INTO transactions VALUES (3, 3, 4, 100.18, 'salary','2011-08-06');
-INSERT INTO transactions VALUES (4, 5, 6, 100.10, 'salary','2007-02-24');
-INSERT INTO transactions VALUES (5, 7, 1, 200.18, 'bonus','2015-02-24');
-INSERT INTO transactions VALUES (6, 4, 3, 1000.10, 'penalty','2015-05-24');
-INSERT INTO transactions VALUES (7, 2, 7, 300.10, 'penalty','2015-05-24');
+INSERT INTO transactions VALUES (1, 1, 2, 100.14, 'salary','2012-09-04 20:08:08');
+INSERT INTO transactions VALUES (2, 2, 3, 100.16, 'salary','2012-09-04 20:08:08');
+INSERT INTO transactions VALUES (3, 3, 4, 100.18, 'salary','2011-08-06 20:08:08');
+INSERT INTO transactions VALUES (4, 5, 6, 100.10, 'salary','2007-02-24 20:08:08');
+INSERT INTO transactions VALUES (5, 7, 1, 200.18, 'bonus','2015-02-24 20:08:08');
+INSERT INTO transactions VALUES (6, 4, 3, 1000.10, 'penalty','2015-05-24 20:08:08');
+INSERT INTO transactions VALUES (7, 2, 7, 300.10, 'penalty','2015-05-24 20:08:08');
 
 
