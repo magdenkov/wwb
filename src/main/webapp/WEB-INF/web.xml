@@ -5,8 +5,8 @@
 	      http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0" metadata-complete="true">
 
-    <display-name>Spring PetClinic</display-name>
-    <description>Spring PetClinic sample application</description>
+    <display-name>Wild west bank</display-name>
+    <description>wwn test project</description>
     
     <context-param>
         <param-name>spring.profiles.active</param-name>
