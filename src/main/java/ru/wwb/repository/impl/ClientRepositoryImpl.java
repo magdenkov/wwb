@@ -1,9 +1,10 @@
 
-package ru.wwb.repository;
+package ru.wwb.repository.impl;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 import ru.wwb.model.Client;
+import ru.wwb.repository.ClientRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

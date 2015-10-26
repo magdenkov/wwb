@@ -1,9 +1,10 @@
 
-package ru.wwb.repository;
+package ru.wwb.repository.impl;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 import ru.wwb.model.Transaction;
+import ru.wwb.repository.TransactionRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
