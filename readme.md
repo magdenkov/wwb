@@ -10,3 +10,5 @@
 Ещё многое не доделанно так что не судите строго.
 В планах сделать авторизацию,2 роли, валидацию, проверку на отриц баланс, юнит тесты
 
+В проекте исползуются Java 7, Spring 4(MVC(+jsp,jstl),core, transactions), Hibernate 4(+HQL), jQuery, maven, hsqldb, tomcat7, git  
+
