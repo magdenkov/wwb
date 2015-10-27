@@ -5,11 +5,7 @@ import ru.wwb.model.Account;
 import ru.wwb.model.Transaction;
 
 public class BSDelegate {
-    private final BankServiceFacadeImpl bankServiceFacadeImpl;
 
-    public BSDelegate(BankServiceFacadeImpl bankServiceFacadeImpl) {
-        this.bankServiceFacadeImpl = bankServiceFacadeImpl;
-    }
 
     Transaction prepareTransactionForNewAccountCreate(Account account) {
         Transaction transaction = new Transaction();

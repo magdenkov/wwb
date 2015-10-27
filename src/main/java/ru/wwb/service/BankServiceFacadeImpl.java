@@ -19,7 +19,7 @@ import java.util.Collection;
 public class BankServiceFacadeImpl implements BankServiceFacade {
 
 
-    private final BSDelegate BSDelegate = new BSDelegate(this);
+
     private AccountRepository accountRepository;
     private ClientRepository clientRepository;
     private TransactionRepository transactionRepository;
@@ -71,13 +71,13 @@ public class BankServiceFacadeImpl implements BankServiceFacade {
     @Transactional
     public void saveAccount(Account account) throws DataAccessException {
         accountRepository.save(account);
-        transactionRepository.save(BSDelegate.prepareTransactionForNewAccountCreate(account));
+        transactionRepository.save(new BSDelegate().prepareTransactionForNewAccountCreate(account));
     }
 
     @Override
     @Transactional
     public void saveTransaction(Transaction transaction) throws DataAccessException {
-        BSDelegate.transferMoney(transaction);
+        new BSDelegate().transferMoney(transaction);
         accountRepository.save(transaction.getAccountTo());
         accountRepository.save(transaction.getAccountFrom());
         transactionRepository.save(transaction);
