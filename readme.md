@@ -1,4 +1,4 @@
-This was a test task for appluing job at DataArt http://www.dataart.ru/blog/2014/07/dolgaya-doroga-v-java/
+This was a test task for applying job at DataArt http://www.dataart.ru/blog/2014/07/dolgaya-doroga-v-java/
 
 
 To run the app You need to 
