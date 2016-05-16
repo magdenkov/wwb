@@ -21,7 +21,7 @@ public class TransactionRepositoryImpl implements TransactionRepository {
     @Override
     @SuppressWarnings("unchecked")
     public Collection<Transaction> findAll() {
-        return this.em.createQuery("SELECT distinct transaction FROM Transaction transaction  ORDER BY transaction.moneyTransferAmount").getResultList();
+        return this.em.createQuery("SELECT  transaction FROM Transaction transaction  ORDER BY transaction.moneyTransferAmount").getResultList();
     }
 
     @Override

@@ -13,6 +13,9 @@ public class Account extends BaseEntity {
     @JoinColumn(name = "client_id")
     private Client client;
 
+    @Version
+    private Long version;
+
     @Column(name = "money_amount", precision=10, scale=2)
     private Double moneyAmount;
 

@@ -2,6 +2,7 @@
 package ru.wwb.service;
 
 import org.springframework.dao.DataAccessException;
+import ru.wwb.exception.NotEnoughMoneyException;
 import ru.wwb.model.Account;
 import ru.wwb.model.Client;
 import ru.wwb.model.Transaction;
@@ -24,7 +25,7 @@ public interface BankServiceFacade {
 
     void saveAccount(Account account) throws DataAccessException;
 
-    void saveTransaction(Transaction transaction) throws DataAccessException;
+    void saveTransaction(Transaction transaction) throws DataAccessException, NotEnoughMoneyException;
 
     Account findAccountById(int id) throws DataAccessException;
 }

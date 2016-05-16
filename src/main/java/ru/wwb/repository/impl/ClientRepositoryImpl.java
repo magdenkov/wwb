@@ -22,7 +22,7 @@ public class ClientRepositoryImpl implements ClientRepository {
     @Override
     @SuppressWarnings("unchecked")
     public Collection<Client> findAll() {
-        return this.em.createQuery("SELECT distinct client FROM Client client  ORDER BY client.lastName, client.firstName").getResultList();
+        return this.em.createQuery("SELECT  client FROM Client client  ORDER BY client.lastName, client.firstName").getResultList();
     }
 
     @Override

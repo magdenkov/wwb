@@ -21,7 +21,7 @@ public class AccountRepositoryImpl implements AccountRepository {
     @SuppressWarnings("unchecked")
     public Collection<Account> findAll() throws DataAccessException {
         return this.em.createQuery
-                ("SELECT distinct account FROM Account account  ORDER BY account.id").getResultList();
+                ("SELECT  account FROM Account account  ORDER BY account.id").getResultList();
 
 
     }

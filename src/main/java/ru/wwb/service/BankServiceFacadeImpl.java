@@ -4,7 +4,9 @@ package ru.wwb.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
+import ru.wwb.exception.NotEnoughMoneyException;
 import ru.wwb.model.Account;
 import ru.wwb.model.Client;
 import ru.wwb.model.Transaction;
@@ -12,6 +14,8 @@ import ru.wwb.repository.AccountRepository;
 import ru.wwb.repository.ClientRepository;
 import ru.wwb.repository.TransactionRepository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import java.util.Collection;
 
 
@@ -23,6 +27,8 @@ public class BankServiceFacadeImpl implements BankServiceFacade {
     private AccountRepository accountRepository;
     private ClientRepository clientRepository;
     private TransactionRepository transactionRepository;
+    @Autowired
+    EntityManager entityManager;
 
     @Autowired
     public BankServiceFacadeImpl(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository) {
@@ -75,9 +81,26 @@ public class BankServiceFacadeImpl implements BankServiceFacade {
     }
 
     @Override
-    @Transactional
-    public void saveTransaction(Transaction transaction) throws DataAccessException {
-        new BSDelegate().transferMoney(transaction);
+    @Transactional(isolation = Isolation.SERIALIZABLE)
+    public void saveTransaction(Transaction transaction) throws DataAccessException, NotEnoughMoneyException {
+        Account accountFrom = accountRepository.findById(transaction.getAccountFrom().getId());
+        Account accountTo = accountRepository.findById(transaction.getAccountTo().getId());
+
+        entityManager.lock(accountFrom, LockModeType.PESSIMISTIC_WRITE);
+        entityManager.lock(accountTo, LockModeType.PESSIMISTIC_WRITE);
+
+        Double moneyTransfer = transaction.getMoneyTransferAmount();
+        Double moneyFrom = accountFrom.getMoneyAmount() - moneyTransfer;
+
+        if (moneyFrom < 0.0) {
+            throw new NotEnoughMoneyException("Not enough money on Account " + transaction.getAccountFrom().getId());
+        }
+
+        Double moneyTo = transaction.getAccountTo().getMoneyAmount() + moneyTransfer;
+
+        transaction.getAccountTo().setMoneyAmount(moneyTo);
+        transaction.getAccountFrom().setMoneyAmount(moneyFrom);
+
         accountRepository.save(transaction.getAccountTo());
         accountRepository.save(transaction.getAccountFrom());
         transactionRepository.save(transaction);

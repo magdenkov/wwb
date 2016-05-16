@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import ru.wwb.exception.NotEnoughMoneyException;
 import ru.wwb.model.Account;
 import ru.wwb.model.Transaction;
 import ru.wwb.service.BankServiceFacade;
@@ -45,7 +46,6 @@ public class TransactionController {
     public String initTransactionCreationForm(Map<String, Object> model) {
 
         Transaction transaction = new Transaction();
-        transaction.settDate(new DateTime());
         model.put("transaction", transaction);
 
         return "transactions/makeTransfer";
@@ -56,7 +56,11 @@ public class TransactionController {
         if (result.hasErrors()) {
             return "transactions/makeTransfer";
         }
-        bankServiceFacade.saveTransaction(transaction);
+        try {
+            bankServiceFacade.saveTransaction(transaction);
+        } catch (NotEnoughMoneyException e) {
+            return "redirect:/transactions.html?success=false";
+        }
         return "redirect:/transactions.html?success=true";
     }
 
